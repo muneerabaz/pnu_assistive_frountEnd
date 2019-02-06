@@ -32,7 +32,7 @@ class App extends Component {
     };
   }
 
-  //
+  // 
   componentDidMount() {
     console.log("fetching data");
     const url = API_URL + `/announcements`;
@@ -50,7 +50,7 @@ class App extends Component {
       });
   }
 
-  /* since i can't fetch more than one in one componentDidMount(){...} 
+   /* since i can't fetch more than one in one componentDidMount(){...} 
    i fetched in another function and called it in componentDidMount(){
    ... this.fetchClubs();} */
 
@@ -61,19 +61,19 @@ class App extends Component {
     console.log("fetching data");
     const url = API_URL + `/clubs`;
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState({
-          clubs: data
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      this.setState({
+        clubs: data
       });
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
-  // both rendering the clubs and ammouncments
+  // both rendering the clubs and ammouncments 
   renderAnnounncements(allAnnouncements) {
     console.log("render", this.state.announcements);
     if (
@@ -107,6 +107,7 @@ class App extends Component {
     } else return <h2> No clubs yet </h2>;
   }
 
+
   changeForm = type => {
     // console.log(type);
     this.setState({
@@ -131,7 +132,7 @@ class App extends Component {
     this.setState({ activeClub: "" });
   }
 
-  // to set the club info
+    // to set the club info
   setActiveClub(activeClub) {
     console.log("####### onClickShow", activeClub);
     this.setState({ activeClub });
@@ -151,7 +152,7 @@ class App extends Component {
     //console.log("active nav is ", activeNav);
     if (activeNav === "login") {
       this.changeForm("login");
-    } else if (activeNav === "announcements" && activeNav === "clubs") {
+    }else if (activeNav === "announcements" && activeNav === "clubs") {
       this.setState({ activeAnnonc: "" });
       this.setState({ activeClub: "" });
     }
@@ -165,15 +166,14 @@ class App extends Component {
           onNavClick={this.onNavClick}
           active={this.state.activeNav}
           navs={this.state.navs}
-          url={<PNU />} // try to render the logo
+          url={<PNU/>} // try to render the logo
           alt=""
           class="img-fluid logo-light"
         />
         <div className="container mt-5 p-0">
-          {/* activeAnnonc is the   */}
+        {/* activeAnnonc is the   */}
           {this.state.activeAnnonc !== "" ? this.showAnno() : ""}
-          {(this.state.activeNav === "announcements") &
-          (this.state.activeAnnonc === "")
+          {(this.state.activeNav === "announcements") & (this.state.activeAnnonc === "")
             ? this.renderAnnounncements(this.state.announcements)
             : ""}
           {/* {(this.state.activeNav === "clubs") & (this)
@@ -181,7 +181,7 @@ class App extends Component {
             : ""} */}
 
           {this.state.activeClub !== "" ? this.showClubInfo() : ""}
-
+          
           {(this.state.activeNav === "clubs") & (this.state.activeClub === "")
             ? this.renderClubs(this.state.clubs)
             : ""}
@@ -190,6 +190,7 @@ class App extends Component {
           ) : (
             ""
           )}
+          
         </div>
         <footer class="footer bg-light">
           <div class="container">

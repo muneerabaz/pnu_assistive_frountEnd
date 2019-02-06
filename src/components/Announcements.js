@@ -13,9 +13,10 @@ const Announcements = props => {
       >
         <h4>{props.announcement.subject}</h4>
         <p className="col-6">{props.announcement.issue_date}</p>
-        <p>{props.announcement.period}</p>
+        {/* <p>{props.announcement.period}</p> */}
         <p>{props.announcement.type}</p>
-        <p>{props.announcement.link}</p>
+        {/* <a href={props.announcement.link}></a> */}
+        {/* <p>{props.announcement.link}</p> */}
       </div>
     </div>
   );

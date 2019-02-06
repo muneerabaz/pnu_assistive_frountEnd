@@ -61,7 +61,7 @@ class Navbar extends Component {
           PNU
         </a>
         <button
-          className="navbar-toggler"
+          // className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"

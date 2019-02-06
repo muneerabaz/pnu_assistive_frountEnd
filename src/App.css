@@ -1,32 +1,182 @@
-.App {
+/* body{
+  width: 100vw;
+  height: 100vh;
+} */
+/* .section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+  background-color: #fff;
+} */
+
+.text-custom {
+  color: #e6c776 !important;
+}
+
+/* .h-100vh {
+  height: 100vh;
+}
+
+.bg-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+} */
+
+.main-nav .navbar-nav li a {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 15px;
+  background-color: transparent !important;
+  margin: 0 7px;
+  letter-spacing: 0.05em;
+  line-height: 24px;
+  transition: all 0.5s;
+  font-weight: 500;
+}
+
+.main-nav .navbar-logo .logo-light,
+.main-nav .navbar-logo .logo-dark {
+  height: 60px;
+}
+
+.logo .logo-light {
+  display: inline-block;
+}
+
+.logo .logo-dark {
+  display: none;
+}
+
+.main-nav .navbar-logo {
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+.main-nav .navbar-toggler {
+  color: #fff;
+  font-size: 35px;
+  padding: 0px;
+}
+
+.main-nav .navbar-nav li a:hover,
+.main-nav .navbar-nav li a:active,
+.main-nav .navbar-nav li.active a {
+  color: #e6c776 !important;
+}
+
+.header-bg-img {
+  background-image: url(https://via.placeholder.com/2000x1333);
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 70% 100%, 0 80%);
+}
+
+.header-content {
+  max-width: 800px;
+}
+
+.header-table-center {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.header-table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.header-name {
+  font-size: 54px;
+}
+
+.header-desc {
+  max-width: 500px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.btn {
+  padding: 15px 32px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.5s;
+  letter-spacing: 0.6px;
+  color: #fff !important;
+  box-shadow: none !important;
+  text-transform: uppercase;
+  outline: none !important;
+}
+
+.btn-custom {
+  border: 1px solid #e6c776;
+  background-color: #e6c776;
+}
+
+.btn-outline-custom {
+  border: 2px solid #f5f5f5 !important;
+}
+
+.btn-round {
+  border-radius: 30px !important;
+}
+
+.about-social li a {
+  color: #000;
+  display: inline-block;
+  height: 42px;
+  width: 42px;
+  font-size: 20px;
+  border-radius: 50%;
+  border: 2px solid #d4d4d4;
+  line-height: 40px;
+  transition: all 0.5s;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.about-social li a:hover {
+  color: #e6c776;
+  border-color: #e6c776;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* .footer {
+  padding: 60px 0px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  background-color: #242424 !important;
+} */
+
+.container-fluid {
+  background-color: #e6c776;
 }
 
-.App-link {
-  color: #61dafb;
-}
+/*===========================
+Media Query
+=============================*/
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width: 200px) and (max-width: 768px) {
+  .main-nav .logo .logo-dark {
+    display: inline-block;
   }
-  to {
-    transform: rotate(360deg);
+  .main-nav .navbar-nav li a {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+  .main-nav .logo .logo-light {
+    display: none;
+  }
+  .h-100vh {
+    height: auto;
+  }
+  .main-nav .navbar-nav li a {
+    margin: 0 0px;
+    line-height: 15px;
+  }
+  .header-name {
+    font-size: 38px;
   }
 }

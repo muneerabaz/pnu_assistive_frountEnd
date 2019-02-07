@@ -9,7 +9,7 @@ const ShowClub = props => {
           {/* <p>{props.clubs.name_arb}</p> */}
           <p>Club of the Faculty of: {props.clubs.realtedTo} :النادي التابع لكلية</p>
           <p>Twitter account: {props.clubs.twitter_account} : الحساب في تويتر </p>
-          <p>E-mail : {props.clubs.email} : الايميل </p>
+          {/* <p>E-mail : {props.clubs.email} : الايميل </p> */}
           <p>office number : {props.clubs.office} : رقم المكتب </p>
           
           {/* {props.clubs.realtedTo} */}

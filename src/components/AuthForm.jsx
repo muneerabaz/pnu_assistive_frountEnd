@@ -1,12 +1,11 @@
-
 import React, { Component } from "react";
 import Input from "./Input";
 import Login from "./Login";
 import Signup from "./Signup";
 import Select from "./Select";
+import { setJwt } from "../services/authService";
 
-
-import { setJwt, getUser } from "../services/authService";
+// import { setJwt, getUser } from "../services/authService";
 
 class AuthForm extends Component {
   constructor() {
@@ -21,12 +20,11 @@ class AuthForm extends Component {
       }
     };
   }
-  
 
   handleRequest(user) {
     let apiUrl = "http://localhost:3000/auth";
 
-    apiUrl += this.props.form === "signup" ? "/users" : "/";
+    apiUrl += this.props.form === "signup" ? "/signup" : "";
     console.log(apiUrl);
     fetch(apiUrl, {
       method: "POST",
@@ -39,9 +37,12 @@ class AuthForm extends Component {
       .then(data => {
         console.log(data);
         setJwt(data.token);
-        const user = getUser(data.token);
+
+        // const user = getUser(data.token);
         this.props.onLogin();
-        this.props.chechWhoUser(user.usertype);
+
+        this.changeActiveNav("add Announcment");
+        // this.props.chechWhoUser(user.usertype);
       })
       .catch(error => {
         console.log(error);
@@ -89,7 +90,6 @@ class AuthForm extends Component {
       />
     );
   };
-
 
   render() {
     return (

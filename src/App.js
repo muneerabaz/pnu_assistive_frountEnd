@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import Announcements from "./components/Announcements";
+import "./App.css";
 import { getUser, logout } from "./services/authService";
+import Announcements from "./components/Announcements";
+import Clubs from "./components/Clubs";
 import NavBar from "./components/NavBar";
 import AuthForm from "./components/AuthForm";
-import Clubs from "./components/Clubs";
-// import ShowAnnouncements from "./components/ShowAnnouncements";
+import NewAnnForm from "./components/NewAnnForm"; 
 import ShowClub from "./components/ShowClub";
-
-import "./App.css";
 import ShowAnnouncInfo from "./components/ShowAnnouncInfo";
-import PNU from "./images/PNU.png";
+
+import PNU from "./images/PNU.png"; // pnu logo
+
 const API_URL = "http://localhost:3000";
 
 class App extends Component {
@@ -20,21 +21,33 @@ class App extends Component {
       navs: ["announcements", "clubs", "login"],
       user: false,
       form: "Login",
+
       // for the announcements to be called , renderd or notwhen needed
       announcements: [],
+
       // to render the announcment info
       activeAnnonc: "",
 
       // for the clubs to be called , renderd or not when needed
       clubs: [],
+
       // to render the club info
       activeClub: ""
     };
   }
 
-  // 
+  checkForUser() {
+    const user = getUser();
+    if (user) {
+      this.login();
+    }
+  }
+
+  //
   componentDidMount() {
     console.log("fetching data");
+
+    this.checkForUser();
     const url = API_URL + `/announcements`;
     this.fetchClubs();
     fetch(url)
@@ -50,10 +63,9 @@ class App extends Component {
       });
   }
 
-   /* since i can't fetch more than one in one componentDidMount(){...} 
+  /* since i can't fetch more than one in one componentDidMount(){...} 
    i fetched in another function and called it in componentDidMount(){
    ... this.fetchClubs();} */
-
   fetchClubs() {
     this.setState({
       announcements: false
@@ -61,19 +73,40 @@ class App extends Component {
     console.log("fetching data");
     const url = API_URL + `/clubs`;
     fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      this.setState({
-        clubs: data
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          clubs: data
+        });
+      })
+      .catch(error => {
+        console.log(error);
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
   }
 
-  // both rendering the clubs and ammouncments 
+
+  fetchNewAnnForm(data){
+    const url = "http://localhost:3000/announcements/"
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        const announcements = data.concat[this.state.announcements];
+        this.setState({announcements});
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  // both rendering the clubs and ammouncments
   renderAnnounncements(allAnnouncements) {
     console.log("render", this.state.announcements);
     if (
@@ -86,10 +119,18 @@ class App extends Component {
             setActiveAnnonc={this.setActiveAnnonc.bind(this)}
             key={a.announcement_id}
             announcement={a}
-          />
+          /> 
         );
       });
     } else return <h2> No Announcements yet </h2>;
+  }
+
+  renderNewAnnForm(){
+    return (
+      <div>
+        <NewAnnForm fetchNewAnnForm={this.fetchNewAnnForm.bind(this)}/>
+      </div>
+    )
   }
 
   renderClubs(fetchClubs) {
@@ -107,7 +148,7 @@ class App extends Component {
     } else return <h2> No clubs yet </h2>;
   }
 
-
+  // the form algorithm
   changeForm = type => {
     // console.log(type);
     this.setState({
@@ -115,14 +156,28 @@ class App extends Component {
     });
   };
 
+  handleNewAnnForm(data){
+    this.fetchNewAnnForm(data)
+  }
+
   login = () => {
     const user = getUser();
     this.setState({ user });
+    // let newNav = this.state.navs.filter(nav => nav !== "login");
+    this.setState({ 
+      navs: ["announcements", "clubs", "add announcement" , "logout"] ,
+      activeNav: "announcements",
+  });
   };
 
   logout = () => {
     logout();
     this.setState({ user: null });
+    let newNav = this.state.navs.filter(nav => nav !== "logout");
+    this.setState({ navs: ["announcements", "clubs", "login"]  ,
+    activeNav: "announcements"
+  });
+    // this.setState({ activeNav: "announcements" });
   };
 
   // to set the announcment info
@@ -132,12 +187,14 @@ class App extends Component {
     this.setState({ activeClub: "" });
   }
 
-    // to set the club info
+  // to set the club info
   setActiveClub(activeClub) {
     console.log("####### onClickShow", activeClub);
     this.setState({ activeClub });
     this.setState({ activeAnnonc: "" });
   }
+
+
 
   showAnno() {
     return <ShowAnnouncInfo announcements={this.state.activeAnnonc} />;
@@ -152,9 +209,13 @@ class App extends Component {
     //console.log("active nav is ", activeNav);
     if (activeNav === "login") {
       this.changeForm("login");
-    }else if (activeNav === "announcements" && activeNav === "clubs") {
+    } else if (activeNav === "announcements" || activeNav === "clubs") {
       this.setState({ activeAnnonc: "" });
       this.setState({ activeClub: "" });
+    } else if (activeNav === "logout") {
+      this.logout();
+    }else if(activeNav === "add announcement"){
+      this.renderNewAnnForm()
     }
     this.setState({ activeNav });
   };
@@ -166,31 +227,58 @@ class App extends Component {
           onNavClick={this.onNavClick}
           active={this.state.activeNav}
           navs={this.state.navs}
-          url={<PNU/>} // try to render the logo
+          url={<PNU />} // try to render the logo
           alt=""
           class="img-fluid logo-light"
         />
-        <div className="container mt-5 p-0">
-        {/* activeAnnonc is the   */}
+
+        <div className="container mt-3 p-0">
+          {/* activeAnnonc is the   */}
+          {/* if activeAnnonc which is (the announcments information )
+           is renderd or not empty then show the announc info  */}
           {this.state.activeAnnonc !== "" ? this.showAnno() : ""}
-          {(this.state.activeNav === "announcements") & (this.state.activeAnnonc === "")
+
+          {/* this.state.activeAnnonc === "" */}
+          {this.state.activeNav === "announcements" &&
+          this.state.activeAnnonc === ""
             ? this.renderAnnounncements(this.state.announcements)
             : ""}
+
+
+          {this.state.activeNav === "add announcement" &&
+          this.state.activeAnnonc === ""
+            ? this.renderNewAnnForm(this.state.announcements)
+            : ""}
+
           {/* {(this.state.activeNav === "clubs") & (this)
             ? this.renderClubs(this.state.clubs)
             : ""} */}
-
           {this.state.activeClub !== "" ? this.showClubInfo() : ""}
-          
-          {(this.state.activeNav === "clubs") & (this.state.activeClub === "")
+
+          {this.state.activeNav === "clubs" && this.state.activeClub === ""
             ? this.renderClubs(this.state.clubs)
             : ""}
+          {/**&(this.state.activeAnnonc !== "")  */}
+          {/* {this.state.activeNav === } */}
+
           {this.state.activeNav === "login" ? (
-            <AuthForm form={this.state.form} onLogin={this.login} />
+            <AuthForm
+              form="login"
+              onLogin={this.login}
+              changeActiveNav={this.onNavClick}
+            />
           ) : (
             ""
           )}
-          
+          {this.state.activeNav === "login" ? (
+            <AuthForm
+              form="login"
+              onLogin={this.login}
+              changeActiveNav={this.onNavClick}
+            />
+          ) : (
+            ""
+          )}
         </div>
         <footer class="footer bg-light">
           <div class="container">

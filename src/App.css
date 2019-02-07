@@ -1,6 +1,23 @@
-/* body{
-  background-image: url('./images/proj4pnu.ai')
-} */
+body{
+    background-image: url('images/pnu2project4.png');
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat-y;
+}
+
+.Login{
+font-size: 60px;
+/* align-items: center; */
+text-align: center;
+color: whitesmoke;
+font-family: Impact, Charcoal, sans-serif;
+
+}
+
+.LoginDiv{
+  align-items: center;
+}
 /* .section {
   padding-top: 100px;
   padding-bottom: 100px;
@@ -8,9 +25,18 @@
   background-color: #fff;
 } */
 
-.text-custom {
-  color: #e6c776 !important;
+/* .jumbotron{
+  background-image: url('./images//proj4pnu.ai');
+} */
+.object{
+  text-align: center;
+  size: 10px
 }
+
+/* .text-custom {
+  color: #e6c776 !important;
+} */
+
 
 /* .h-100vh {
   height: 100vh;
@@ -24,6 +50,12 @@
   width: 100%;
   height: 100%;
 } */
+
+.navbar-toggler-icon{
+  height: 25px;
+  padding: 0px;
+  margin: 3px;  
+}
 
 .main-nav .navbar-nav li a {
   color: rgba(255, 255, 255, 0.6) !important;
@@ -151,8 +183,21 @@
 } */
 
 .container-fluid {
-  background-color: #e6c776;
+  background-color: green;
 }
+
+
+.form-elegant .font-small {
+  font-size: 0.8rem; }
+
+.form-elegant .z-depth-1a {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+  box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25); }
+
+.form-elegant .z-depth-1-half,
+.form-elegant .btn:hover {
+  -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+  box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15); }
 
 /*===========================
 Media Query

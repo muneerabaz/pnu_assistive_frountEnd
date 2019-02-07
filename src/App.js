@@ -232,7 +232,7 @@ class App extends Component {
           class="img-fluid logo-light"
         />
 
-        <div className="container mt-3 p-0">
+        <div className="container mt-5 p-3">
           {/* activeAnnonc is the   */}
           {/* if activeAnnonc which is (the announcments information )
            is renderd or not empty then show the announc info  */}
@@ -261,7 +261,7 @@ class App extends Component {
           {/**&(this.state.activeAnnonc !== "")  */}
           {/* {this.state.activeNav === } */}
 
-          {this.state.activeNav === "login" ? (
+          {/* {this.state.activeNav === "login" ? (
             <AuthForm
               form="login"
               onLogin={this.login}
@@ -269,7 +269,8 @@ class App extends Component {
             />
           ) : (
             ""
-          )}
+          )} */}
+          
           {this.state.activeNav === "login" ? (
             <AuthForm
               form="login"
